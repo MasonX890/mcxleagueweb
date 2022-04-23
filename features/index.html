@@ -1,0 +1,1318 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<script src="/cdn-cgi/apps/head/yXbaHZ1DK9rvkEsfHz6G7iYqIos.js"></script><link rel='icon' href='https://ropro.io/images/favicon.ico' type='image/x-icon' />
+<link rel="stylesheet" href="/stylesheet.css">
+<title>RoPro - Features</title>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G7GGZC2KLL" type="3ca59dfc1340f4589ca1b7a0-text/javascript"></script>
+<script type="3ca59dfc1340f4589ca1b7a0-text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G7GGZC2KLL');
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-183039682-1" type="3ca59dfc1340f4589ca1b7a0-text/javascript">
+</script>
+<script type="3ca59dfc1340f4589ca1b7a0-text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-183039682-1');
+</script>
+<style>
+@media only screen and (max-width: 660px){
+.tierIconSmall {
+    display:none;
+}
+.TierChoose {
+    font-size:13px!important;
+}
+}
+@media only screen and (max-width: 1000px){
+.ad-box {
+    margin-top:150px!important;
+}
+}
+s, strike{text-decoration:none;position:relative;}
+s::before, strike::before {
+    top: 45%; /*tweak this to adjust the vertical position if it's off a bit due to your font family */
+    background:red; /*this is the color of the line*/
+    opacity:.7;
+    content: '';
+    width: 110%;
+    position: absolute;
+    height:0.15em;
+    border-radius:.15em;
+    left: -5%;
+    white-space:nowrap;
+    display: block;
+    transform: rotate(2deg);  
+}
+s.straight::before, strike.straight::before{transform: rotate(0deg);left:-1%;width:102%;}
+
+</style>
+<script type="3ca59dfc1340f4589ca1b7a0-text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="https://cdn.paddle.com/paddle/paddle.js" type="3ca59dfc1340f4589ca1b7a0-text/javascript"></script>
+<script type="3ca59dfc1340f4589ca1b7a0-text/javascript">
+    var eventPrefix = "";	Paddle.Setup({ vendor: 131487 });
+	function openPaddle(product) {
+	    if (product == 100) {
+	        window.open('https://www.roblox.com/games/6975571252/RoPro-Standard-Tier-Hangout#!/game-instances', '_blank');
+	        return
+	    }
+	    plans = {656270: "standard_monthly", 656271: "pro_monthly", 656273: "ultra_monthly", 656284: "standard_yearly", 656285: "pro_yearly", 656286: "ultra_yearly"}
+	    gtag('event', eventPrefix + 'checkout_' + plans[product], {'event_callback': function() {console.log('Clicked button.')}});
+	    crypto_products = {725304: "https://commerce.coinbase.com/checkout/0dff9801-3740-40c5-b2b0-1668a07b4d0b", 725495: "https://commerce.coinbase.com/checkout/c7b731b1-4d21-492e-ad2b-dc6c06ed1a3f", 725502: "https://commerce.coinbase.com/checkout/757fde1f-41fe-4d3d-a7dd-80aeaa3a9dd0", 725506: "https://commerce.coinbase.com/checkout/bbda85e7-4d64-48d9-9338-42412fd179e6", 725508: "https://commerce.coinbase.com/checkout/cddf5e72-9b6b-4287-b7ce-2bdccb0e4288", 725509: "https://commerce.coinbase.com/checkout/6468acf1-068b-4732-b678-eb0303405091"}
+	    prices = {656270: 3.99, 656271: 7.99, 656273: 19.99, 656284: 29.99, 656285: 59.99, 656286: 159.99}
+	    names = {656270: "RoPro Standard Tier Monthly", 656271: "RoPro Pro Tier Monthly", 656273: "RoPro Ultra Tier Monthly", 656284: "RoPro Standard Tier Yearly", 656285: "RoPro Pro Tier Yearly", 656286: "RoPro Ultra Tier Yearly"}
+	    indexes = {656270: 1, 656271: 2, 656273: 3, 656284: 4, 656285: 5, 656286: 6}
+	    gtag("event", "add_to_cart", {
+          currency: "USD",
+          value: prices[product],
+          items: [
+            {
+              item_id: plans[product],
+              item_name: names[product],
+              affiliation: "RoPro",
+              currency: "USD",
+              index: indexes[product],
+              item_brand: "RoPro",
+              location_id: "Homepage",
+              price: prices[product],
+              quantity: 1
+            }
+          ]
+        });
+	    if (1 == 0) { //product in crypto_products
+	        window.open(crypto_products[product])
+	    } else {
+    	    Paddle.Checkout.open({
+    	        coupon: '',
+                product: product,
+                successCallback: function(data) {
+                    var checkoutId = data.checkout.id;
+                    Paddle.Order.details(checkoutId, function(data) {
+                        console.log("Response:")
+                        console.log(data)
+                        if (data.state == "processed") {
+                            function checkKey(data) {
+                                subscription_name = data.checkout.title.split(" - ")[0]
+                                prefix = subscription_name.split(" Tier")[0].replace("RoPro ", "").toLowerCase()
+                                postData = btoa(JSON.stringify({"email": data.order.customer.email, "subscription": btoa(btoa(btoa(data.order.subscription_id))), "type": prefix}))
+                                $.post("https://ropro.io/api/savePostData.php", {"post_data": postData}, function(data){
+                                    var url = 'https://ropro.io/purchase';
+                                    var form = $('<form action="' + url + '" method="post">' +
+                                      '<input type="text" name="post_data" value="' + postData + '" />' +
+                                      '</form>');
+                                    $('body').append(form);
+                                    form.submit();  
+                                })
+                            }
+                            checkKey(data)
+                    	    gtag("event", "purchase", {
+                              currency: "USD",
+                              transaction_id: data.order.subscription_id,
+                              value: prices[product],
+                              items: [
+                                {
+                                  item_id: plans[product],
+                                  item_name: names[product],
+                                  affiliation: "RoPro",
+                                  currency: "USD",
+                                  index: indexes[product],
+                                  item_brand: "RoPro",
+                                  location_id: "Homepage",
+                                  price: prices[product],
+                                  quantity: 1
+                                }
+                              ]
+                            });
+                        } else {
+                            //if (data == false) {
+                            //    alert("Payment failed.");
+                            //} else {
+                                alert("Your payment is processing, this may take some time. Please check your email inbox as well as spam folder for your RoPro Subscription Key. If you do not receive one, please contact RoPro support.");
+                            //}
+                        }
+                    });
+            	    gtag('event', eventPrefix + 'purchased_' + plans[product], {'event_callback': function() {console.log('Purchased.')}});
+                },
+                closeCallback: function() {
+                    gtag('event', eventPrefix + 'closed_' + plans[product], {'event_callback': function() {console.log('Closed Paddle.')}});
+                }
+    	    })
+	    }
+	}
+</script>
+</head>
+<body style="background-size:100% 300%">
+
+<script type="3ca59dfc1340f4589ca1b7a0-text/JavaScript">
+window.zESettings = {
+  webWidget: {
+    offset: { horizontal: '10px', vertical: '10px' },
+    zIndex: 1,
+    chat: {
+      suppress: true
+    },
+    contactForm: {
+      title: {
+        '*': 'Support'
+      },
+      attachments: false
+    },
+    launcher: {
+      label: {
+        'en-US': 'Support',
+        '*': 'Support'
+      }
+    }
+  }
+};
+function param(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
+$(document).ready(function() {
+    if (param('monthly') != null) {
+        if (param('standard') != null) {
+            document.getElementById('standardTierMonthlyPurchase').click()
+        }
+    }
+})
+</script>
+
+<div class="backblur" style="display:none;width:100%;height:65px;position:fixed;top:0;left:0;background:#ffffff01;backdrop-filter: blur(10px);z-index:10"></div>
+<div id="header" class="top-header" role="navigation">
+<ul class="Logo">
+<a class="LogoIcon" href="/">
+</a>
+</ul>
+<ul class="headeritems">
+<li class="MenuItem" selected="">
+<a class="HeaderLinks" href="/">Home</a></li>
+<li class="MenuItem" selected="">
+<a class="HeaderLinks" href="/eggs">Egg Hunt 2022</a></li>
+<li class="MenuItem" selected="true">
+<a class="HeaderLinks" href="/features">Features</a></li>
+<li class="MenuItem" selected="">
+<a class="HeaderLinks" href="/support">Support</a></li>
+<li class="MenuItem" id="MoreBtn">
+<a id="moreicon">More ▼</a>
+<ul class="morebtnhover">
+<li class="morebtn">
+<a target="_blank" href="/subscription">My Subscription</a>
+</li>
+<li class="morebtn">
+<a target="_blank" href="/dice/?chance=50">Random Game</a>
+</li>
+<li class="morebtn">
+<a target="_blank" href="/changelog">Changelog</a>
+</li>
+<li class="morebtn">
+<a target="_blank" href="https://ropro.nolt.io/">Suggest Features</a>
+</li>
+</ul>
+</li>
+<li class="MenuItem" id="MoreBtnMobile">
+<a style="vertical-align:top;" id="moreicon">☰</a>
+<ul class="morebtnhover">
+<li class="morebtn">
+<a target="_blank" href="/subscription">My Subscription</a>
+</li>
+<li class="morebtn">
+<a target="_blank" href="/dice/?chance=50">Random Game</a>
+</li>
+<li class="morebtn">
+<a target="_blank" href="/changelog">Changelog</a>
+</li>
+<li class="morebtn">
+<a target="_blank" href="https://ropro.nolt.io/">Suggest Features</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="IconItems">
+<li class="IconItem" id="Support">
+<a target="_blank" class="IconLinks" href="https://ropro.io/support"></a></li>
+<li class="IconItem" id="RobloxGroup">
+<a target="_blank" class="IconLinks" href="https://ropro.io/group"></a></li>
+<li class="IconItem" id="Discord">
+<a target="_blank" class="IconLinks" href="https://ropro.io/discord"></a></li>
+<li class="IconItem" id="Twitter">
+<a target="_blank" class="IconLinks" href="https://ropro.io/twitter"></a></li>
+<li class="IconItem" id="TikTok">
+<a target="_blank" class="IconLinks" href="https://ropro.io/tiktok"></a></li>
+</ul>
+</div>
+<section style="margin-top:70px;" class="Features">
+
+<div style="margin-top:-40px;" class="TiersChooseContainer">
+<div class="TierChooseMenu">
+<div class="TierSelector activeFree" id="SelectTier"></div>
+<button class="TierChoose" id="FreeBtn" onclick="if (!window.__cfRLUnblockHandlers) return false; FreeShow()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-=""> <img class="tierIconSmall" src="https://ropro.io/images/Tiers/free.png" width="25" height="25" style="filter: drop-shadow(1px 1px 1px #363636);margin:-6px;margin-right:5px;"> Free Features </button>
+<button class="TierChoose" id="StandardBtn" onclick="if (!window.__cfRLUnblockHandlers) return false; StandardShow()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-=""> <img class="tierIconSmall" src="https://ropro.io/images/Tiers/standard.png" width="25" height="25" style="filter: drop-shadow(1px 1px 1px #363636);margin:-6px;margin-right:5px;"> Standard Features </button>
+<button class="TierChoose" id="ProBtn" onclick="if (!window.__cfRLUnblockHandlers) return false; ProShow()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-=""> <img class="tierIconSmall" src="https://ropro.io/images/Tiers/pro.png" width="25" height="25" style="filter: drop-shadow(1px 1px 1px #363636);margin:-6px;margin-right:5px;"> Pro Features </button>
+<button class="TierChoose" id="UltraBtn" onclick="if (!window.__cfRLUnblockHandlers) return false; UltraShow()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-=""> <img class="tierIconSmall" src="https://ropro.io/images/Tiers/ultra.png" width="25" height="25" style="filter: drop-shadow(1px 1px 1px #363636);margin:-6px;margin-right:5px;"> Ultra Features </button>
+<script type="3ca59dfc1340f4589ca1b7a0-text/javascript">
+				function FreeShow() {
+				var Free = document.getElementById("FreeCont");
+				var Standard = document.getElementById("StandardCont");
+				var Pro = document.getElementById("ProCont");
+				var Ultra = document.getElementById("UltraCont");
+				var Select = document.getElementById("SelectTier");
+				Free.classList.remove("hidden");
+				Standard.classList.add("hidden");
+				Pro.classList.add("hidden");
+				Ultra.classList.add("hidden");
+				Select.classList.add("activeFree");
+				Select.classList.remove("activeStandard");
+				Select.classList.remove("activePro");
+				Select.classList.remove("activeUltra")} 
+			</script>
+<script type="3ca59dfc1340f4589ca1b7a0-text/javascript">
+				function StandardShow() {
+				var Free = document.getElementById("FreeCont");
+				var Standard = document.getElementById("StandardCont");
+				var Pro = document.getElementById("ProCont");
+				var Ultra = document.getElementById("UltraCont");
+				var Select = document.getElementById("SelectTier");
+				Free.classList.add("hidden");
+				Standard.classList.remove("hidden");
+				Pro.classList.add("hidden");
+				Ultra.classList.add("hidden");
+				Select.classList.remove("activeFree");
+				Select.classList.add("activeStandard");
+				Select.classList.remove("activePro");
+				Select.classList.remove("activeUltra")}
+			</script>
+<script type="3ca59dfc1340f4589ca1b7a0-text/javascript">
+				function ProShow() {
+				var Free = document.getElementById("FreeCont");
+				var Standard = document.getElementById("StandardCont");
+				var Pro = document.getElementById("ProCont");
+				var Ultra = document.getElementById("UltraCont");
+				var Select = document.getElementById("SelectTier");
+				Free.classList.add("hidden");
+				Standard.classList.add("hidden");
+				Pro.classList.remove("hidden");
+				Ultra.classList.add("hidden");
+				Select.classList.remove("activeFree");
+				Select.classList.remove("activeStandard");
+				Select.classList.add("activePro");
+				Select.classList.remove("activeUltra")} 
+			</script>
+<script type="3ca59dfc1340f4589ca1b7a0-text/javascript">
+				function UltraShow() {
+				var Free = document.getElementById("FreeCont");
+				var Standard = document.getElementById("StandardCont");
+				var Pro = document.getElementById("ProCont");
+				var Ultra = document.getElementById("UltraCont");
+				var Select = document.getElementById("SelectTier");
+				Free.classList.add("hidden");
+				Standard.classList.add("hidden");
+				Pro.classList.add("hidden");
+				Ultra.classList.remove("hidden");
+				Select.classList.remove("activeFree");
+				Select.classList.remove("activeStandard");
+				Select.classList.remove("activePro");
+				Select.classList.add("activeUltra")}
+			</script>
+</div>
+</div>
+<div class="TierFeaturesContainer " id="FreeCont">
+<ul class="FeaturesGridContainer">
+<ul class="FeaturePurchaseSubscription" id="Free">
+<span>All features listed below are free!</span>
+</ul>
+<ul class="FeatureBreakup" style="margin-top:30px">
+<li class="FeaturesTitle">
+<p>General Features (20)</p>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">RoPro Avatar Sandbox</a>
+<a class="PreviewFeature" href="#FreeFeature1"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature1">
+<a>RoPro Avatar Sandbox</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/sandbox.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Try on any combo before you buy it</p>
+<br>
+<p>Renders 3D avatar preview & customizable background</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Avatar editor changes</a>
+<a class="PreviewFeature" href="#FreeFeature01"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature01">
+<a>Avatar editor changes</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/avatar_editor_changes.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds customizable avatar editor backgrounds, quick equip button, outfit cost, and more!</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Experience quick search</a>
+<a class="PreviewFeature" href="#FreeFeature02"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature02">
+<a>Experience quick search</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/experience_quick_search.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>RoPro will show the best experience for your search term in the search dropdown.</p>
+<br>
+<p>Press the quick play or random server button to automatically join the experience.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Most played experiences on homepage</a>
+<a class="PreviewFeature" href="#FreeFeature3"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature3">
+<a>Most played experiences on homepage</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/most_played.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Display the experiences you play the most right on your homepage!</p>
+<br>
+<p>Easily access the experiences you want to play without having to find them.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Experience playtime tracking</a>
+<a class="PreviewFeature" href="#FreeFeature4"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature4">
+<a>Experience playtime tracking</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/playtime_tracking.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Keeps track of how many minutes & hours you spend in a experience.</p>
+<br>
+<p>Shows how many hours you've played in the last week.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Server filters</a>
+<a class="PreviewFeature" href="#FreeFeature03"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature03">
+<a>Server filters</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/server_filters.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds several free server list filtering options.</p>
+<br>
+<p>Easily find empty servers, servers which aren't full, or custom sort by server size!</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Rejoin most recent server</a>
+<a class="PreviewFeature" href="#FreeFeature5"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature5">
+<a>Rejoin most recent server</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/most_recent_server.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Automatically save your most recent active server on each experience.</p>
+<br>
+<p>Easily rejoin a server you left or got disconnected from.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Join random server button</a>
+<a class="PreviewFeature" href="#FreeFeature04"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature04">
+<a>Join random server button</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/random_server.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Join a random server of a game.</p>
+<br>
+<p>Avoids Roblox automatically placing you in servers with your friends, useful for server hopping.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Profile themes</a>
+<a class="PreviewFeature" href="#FreeFeature6"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature6">
+<a>Profile themes</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/profile_themes.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Customize your Roblox profile with fresh backgrounds.</p>
+<br>
+<p>Other RoPro users will see your profile theme when they visit.</p>
+<br>
+<p>Join the RoPro discord server to submit custom themes for approval.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Last online</a>
+<a class="PreviewFeature" href="#FreeFeature05"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature05">
+<a>Last online</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/last_online.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds offline indicator to profile.</p>
+<br>
+<p>Hover to see when the user was last online and on which platform.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Experience genre filters</a>
+<a class="PreviewFeature" href="#FreeFeature7"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature7">
+<a>Experience genre filters</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/genre_filter.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Filter experiences by their genre.</p>
+<br>
+<p>Scroll as you normally would, RoPro will actively filter out other genres.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">"Random Experience" button</a>
+<a class="PreviewFeature" href="#FreeFeature8"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature8">
+<a>"Random Experience" button</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/random_game.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Bored? Roll the dice to find a random experience.</p>
+<br>
+<p>Choose the range of experiences you want to roll for.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Popular experiences today</a>
+<a class="PreviewFeature" href="#FreeFeature9"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature9">
+<a>Popular experiences today</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/popular_today.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Shows the most popular experiences with RoPro users today.</p>
+<br>
+<p>experiences are sorted by the amount of hours played by RoPro users (who have experience playtime tracking enabled) in the last 24 hours!</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Upcoming items on catalog</a>
+<a class="PreviewFeature" href="#FreeFeature10"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature10">
+<a>Upcoming items on catalog</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/upcoming_items.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Creates a section for unreleased/upcoming items on the catalog page.</p>
+<br>
+<p>Integrated with Rolimons.com, RoPro will display items that have been discovered but not yet released.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Mutual friends</a>
+<a class="PreviewFeature" href="#FreeFeature11"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature11">
+<a>Mutual friends</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/mutual_friends.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>View the friends that you share with other users on their profile and on their friends page.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">RoPro Reputation on profiles</a>
+<a class="PreviewFeature" href="#FreeFeature12"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature12">
+<a>RoPro Reputation on profiles</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/ropro_reputation.png)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>View the RoPro reputation of other users.</p>
+<br>
+<p>Note: You must be a subscriber to vote on reputation.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Link Discord to profile (13+)</a>
+<a class="PreviewFeature" href="#FreeFeature13"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature13">
+<a>Link Discord to profile (13+)</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/link_discord.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Link your discord to your profile.</p>
+<br>
+<p>Other RoPro users will see this discord displayed when visiting your profile.</p>
+<br>
+<p>Note: To comply with the Roblox TOS, this feature is disabled for 13- Roblox users.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">View linked Discord of other users (13+)</a>
+<a class="PreviewFeature" href="#FreeFeature14"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature14">
+<a>View linked Discord of other users (13+)</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/profile_discord.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Quickly view and contact other RoPro users on discord.</p>
+<br>
+<p>Note: To comply with the Roblox TOS, this feature is disabled for 13- Roblox users.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Experience Twitter feed integration (13+)</a>
+<a class="PreviewFeature" href="#FreeFeature15"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature15">
+<a>Experience Twitter feed integration (13+)</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/profile_twitter.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Quickly view recent tweets (updates, experience codes, etc.) from any experience with a linked twitter.</p>
+<br>
+<p>Note: To comply with the Roblox TOS, this feature is disabled for 13- Roblox users.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Group Twitter feed integration (13+)</a>
+<a class="PreviewFeature" href="#FreeFeature26"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature26">
+<a>Group Twitter feed integration (13+)</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/group_twitter.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Integrates group twitter feed onto group page.</p>
+<br>
+<p>Note: To comply with the Roblox TOS, this feature is disabled for 13- Roblox users.</p>
+</div>
+</div>
+</li>
+</ul>
+<ul class="FeatureBreakup">
+<li class="FeaturesTitle">
+<p>Trading Features (10)</p>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">RoPro Trade Panel</a>
+<a class="PreviewFeature" href="#FreeFeature16"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature16">
+<a>RoPro Trade Panel</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/trade_panel.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>RoPro Trade Panel adds tons of new trading features.</p>
+<br>
+<p>Make your trading 1000x faster.</p>
+<br>
+<p>Decline all, cancel all, decline suspected botters, and more!</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Item Info Card</a>
+<a class="PreviewFeature" href="#FreeFeature17"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature17">
+<a>Item Info Card</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/item_info_card.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Quickly view relevant information on items in trades.</p>
+<br>
+<p>See whether an item is projected, recent sales, and more.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Trade age on sidebar</a>
+<a class="PreviewFeature" href="#FreeFeature18"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature18">
+<a>Trade age on sidebar</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/trade_age.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>See exactly how old a trade is on the sidebar.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">RoPro Trade Offers</a>
+<a class="PreviewFeature" href="#FreeFeature19"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature19">
+<a>RoPro Trade Offers</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/trade_offers.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Public trade offers board, post what you will give for an item.</p>
+<br>
+<p>You can also find item-specific offers on the item page of limiteds.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Quick decline & quick cancel</a>
+<a class="PreviewFeature" href="#FreeFeature20"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature20">
+<a>Quick decline & quick cancel</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/quick_decline.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Quickly decline or cancel inbound/outbound trades from the sidebar.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Integrated user account value</a>
+<a class="PreviewFeature" href="#FreeFeature21"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature21">
+<a>Integrated user account value</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/profile_value.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>View total item value of a user on their profile.</p>
+<br>
+<p>Note: Values are calculated by RoPro using updated Rolimons.com item values.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Comment section on limited items</a>
+<a class="PreviewFeature" href="#FreeFeature22"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature22">
+<a>Comment section on limited items</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/comments.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds comment section to limited items.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Projected warnings on item page</a>
+<a class="PreviewFeature" href="#FreeFeature23"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature23">
+<a>Projected warnings on item page</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/projected_item.png)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>View projected warning on item pages.</p>
+<br>
+<p>Note: Projected items are determined using the Rolimons.com projected label.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Quick trade button for resellers</a>
+<a class="PreviewFeature" href="#FreeFeature24"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature24">
+<a>Quick trade button for resellers</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/quick_trade.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds quick trade button to item sellers section for sellers with trades enabled.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Hide serials on trades</a>
+<a class="PreviewFeature" href="#FreeFeature25"></a>
+<div class="PreviewFeatureContainer" id="FreeFeature25">
+<a>Hide serials on trades</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/hide_serials.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds toggleable button to blur out the serial number of items.</p>
+<br>
+<p>Useful for traders who want to screenshot a trade but don't want to reveal their or their trade partner's account.</p>
+</div>
+</div>
+</li>
+</ul>
+</ul>
+</div>
+<div class="TierFeaturesContainer hidden" id="StandardCont">
+<ul class="FeaturesGridContainer">
+<ul class="FeaturePurchaseSubscription">
+<a>(Includes all Free Tier features)</a>
+</ul>
+<div class="PurchaseFeaturesCont">
+<div class="subtiername" style="display:flex;flex-direction:row">
+<img src="https://ropro.io/images/Tiers/standard.png" width="25" height="25" style="float:left;z-index:1000;">
+<a style="margin-left:15px;height:25px;line-height:25px;float:left">Standard Tier - <span id="standardAmount">$3.99/month</span><span id="standardAmountRobux" style="display:none;"><img class="robuxIcon" src="https://ropro.io/images/robux_icon.svg" style="width:18px;margin:0px;margin-top:0px;margin-right:4px;margin-bottom:-3.5px;">450/month</span></a>
+</div>
+<div class="subbuttons" style="display:flex;flex-direction:row">
+<div style="height:35px;line-height:25px;margin:auto;margin-right:5px;">
+<input id="standardYearly" button-checked="0" onclick="if (!window.__cfRLUnblockHandlers) return false; if(this.getAttribute('button-checked')==0){this.setAttribute('button-checked',1);checked=1;}else{this.setAttribute('button-checked',0);checked=0;};monthly=[document.getElementById('standardOTP').getAttribute('button-checked') == 0 ? 656270 : 725304, document.getElementById('standardOTP').getAttribute('button-checked') == 0 ? '$3.99/month' : '$3.99 [One Month Only]'];yearly=[document.getElementById('standardOTP').getAttribute('button-checked') == 0 ? 656284 : 725506, document.getElementById('standardOTP').getAttribute('button-checked') == 0 ? '$29.99/year' : '$29.99 [One Year Only]'];purchase=document.getElementById('standardTierMonthlyPurchase');amount=document.getElementById('standardAmount');if(checked){purchase.setAttribute('data-product',yearly[0]);amount.innerHTML=yearly[1]}else{purchase.setAttribute('data-product',monthly[0]);amount.innerHTML=monthly[1]};" type="checkbox" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<label onclick="if (!window.__cfRLUnblockHandlers) return false; this.parentNode.getElementsByTagName('input')[0].click()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">Save 33% with Yearly Pricing</label>
+</div>
+<div style="display:none;padding-left:10px;height:35px;line-height:25px;margin:auto;padding-right:10px;">
+<input style="cursor:pointer;" id="standardRobux" button-checked="0" onclick="if (!window.__cfRLUnblockHandlers) return false; if(this.getAttribute('button-checked')==0){this.setAttribute('button-checked',1);checked=1;}else{this.setAttribute('button-checked',0);checked=0;};purchase=document.getElementById('standardTierMonthlyPurchase');amount=document.getElementById('standardAmount');if(checked){purchase.setAttribute('data-product','100');document.getElementById('standardAmountRobux').style.display='inline-block';document.getElementById('standardAmount').style.display='none';document.getElementById('standardTierMonthlyPurchase').innerHTML='Subscribe To Private Server';if(document.getElementById('standardYearly').getAttribute('button-checked')==1)(document.getElementById('standardYearly').click());document.getElementById('standardYearly').setAttribute('disabled', 'true');}else{purchase.setAttribute('data-product','656270');document.getElementById('standardAmountRobux').style.display='none';document.getElementById('standardAmount').style.display='inline-block';document.getElementById('standardTierMonthlyPurchase').innerHTML='Subscribe';document.getElementById('standardYearly').removeAttribute('disabled');};" type="checkbox" data-cf-modified-3ca59dfc1340f4589ca1b7a0-=""><label style="cursor:pointer;" onclick="if (!window.__cfRLUnblockHandlers) return false; if (!window.__cfRLUnblockHandlers) return false; this.parentNode.getElementsByTagName('input')[0].click()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">Pay with Robux via Private Server</label><div style="bottom:-25px;left:10px;margin-bottom:-5px;font-size:14px;" class="PurchaseCheckbox">
+</div>
+</div>
+<div style="padding-left:10px;height:35px;line-height:25px;margin:auto;padding-right:10px;display:none;">
+<input id="standardOTP" button-checked="0" onclick="if (!window.__cfRLUnblockHandlers) return false; if(this.getAttribute('button-checked')==0){this.setAttribute('button-checked',1);checked=1;document.getElementById('standardTierMonthlyPurchase').innerHTML='Purchase';}else{this.setAttribute('button-checked',0);checked=0;document.getElementById('standardTierMonthlyPurchase').innerHTML='Subscribe';};monthly=[document.getElementById('standardYearly').getAttribute('button-checked') == 0 ? 656270 : 656284,document.getElementById('standardYearly').getAttribute('button-checked') == 0 ? '$3.99/month' : '$29.99/year'];yearly=[document.getElementById('standardYearly').getAttribute('button-checked') == 0 ? 725304 : 725506,document.getElementById('standardYearly').getAttribute('button-checked') == 0 ? '$3.99 [One Month Only]' : '$29.99 [One Year Only]'];purchase=document.getElementById('standardTierMonthlyPurchase');amount=document.getElementById('standardAmount');if(checked){purchase.setAttribute('data-product',yearly[0]);amount.innerHTML=yearly[1]}else{purchase.setAttribute('data-product',monthly[0]);amount.innerHTML=monthly[1]};" type="checkbox" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<label onclick="if (!window.__cfRLUnblockHandlers) return false; this.parentNode.getElementsByTagName('input')[0].click()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">One Time Purchase</label>
+</div>
+<button class="buttonMonthlyPurchase" id="standardTierMonthlyPurchase" onclick="if (!window.__cfRLUnblockHandlers) return false; openPaddle(parseInt(this.getAttribute('data-product')))" data-product="656270" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<b>Subscribe</b>
+</button>
+</div>
+</div>
+<ul class="FeatureBreakup" style="margin-top:30px">
+<li class="FeaturesTitle">
+<p>General Features (9)</p>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">View server region, version, and uptime</a>
+<a class="PreviewFeature" href="#StandardFeature1"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature1">
+<a>View server region, version, and uptime</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/additional_server_info.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds additional info to each server on the server list.</p>
+<br>
+<p>Hover to see the region of each server, the experience update version of each server, and the uptime of each server!</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">More server filters (region, connection, uptime)</a>
+<a class="PreviewFeature" href="#StandardFeature2"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature2">
+<a>More server filters (region, connection, uptime)</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/more_server_filters.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds the subscriber only server filters.</p>
+<br>
+<p>Filter the server list by region, best connection, or newest/oldest servers!</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">More experience filters</a>
+<a class="PreviewFeature" href="#StandardFeature3"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature3">
+<a>More experience filters</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/more_filters.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds additional experience filters along-side the Genre Filters that Free Tier users get</p>
+<br>
+<p>Some filters include: Single-player experiences, Paid access experiences, Classic experiences, Recently updated experiences, Gear allowed experiences</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">More mutuals</a>
+<a class="PreviewFeature" href="#StandardFeature4"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature4">
+<a>More mutuals</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/more_mutuals.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>View the favorite experiences, groups, items, limiteds, and more than you share with another user on their friends page!</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Experience like/dislike ratio filter</a>
+<a class="PreviewFeature" href="#StandardFeature5"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature5">
+<a>Experience like/dislike ratio filter</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/like_filter.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Filter experiences by the like/dislike ratio</p>
+<br>
+<p>Useful for users who only want to see the highest quality experiences</p>
+<br>
+<p>Scroll as you normally would, RoPro will actively filter experiences below the chosen like/dislike ratio</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Live experience like, dislike, and favorite counters</a>
+<a class="PreviewFeature" href="#StandardFeature7"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature7">
+<a>Live experience like, dislike, and favorite counters</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/live_like_counter.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Live updates the like, dislike, and favorite counts of a experience</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Animated profile themes</a>
+<a class="PreviewFeature" href="#StandardFeature8"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature8">
+<a>Animated profile themes</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/animated_profile_themes.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Customize your Roblox profile with animated themes</p>
+<br>
+<p>Other RoPro users will see your theme when they visit your profile</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Save outfits in Sandbox</a>
+<a class="PreviewFeature" href="#StandardFeature9"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature9">
+<a>Save outfits in Sandbox</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/sandbox_outfits.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Name and save your sandbox outfits</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">More experience playtime sorts</a>
+<a class="PreviewFeature" href="#StandardFeature01"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature01">
+<a>More experience playtime sorts</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/more_playtime_sorts.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>See your most played experiences of the past month, year, and all time!</p>
+<br>
+<p>Easily access the experiences you want to play without having to find them.</p>
+</div>
+</div>
+</li>
+</ul>
+<ul class="FeatureBreakup">
+<li class="FeaturesTitle">
+<p>Trading Features (8)</p>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Item values & demands in trades</a>
+<a class="PreviewFeature" href="#StandardFeature10"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature10">
+<a>Item values & demands in trades</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/trade_value_demand.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Integrates Rolimons.com item values & demands directly into trades & the trade window</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Trade value & demand calculator</a>
+<a class="PreviewFeature" href="#StandardFeature11"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature11">
+<a>Trade value & demand calculator</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/trade_calculator.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Calculates the total trade value and demand in real-time in trades & the trade window</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Item values & demands on item page</a>
+<a class="PreviewFeature" href="#StandardFeature12"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature12">
+<a>Item values & demands on item page</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/item_value_demand.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Integrates each item's Rolimons.com value and demand into the Roblox item page</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">More Trade Panel buttons</a>
+<a class="PreviewFeature" href="#StandardFeature13"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature13">
+<a>More Trade Panel buttons</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/more_trade_panel.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Adds more trade panel features for subscribers.</p>
+<br>
+<p>Some features include: decline all losses (based on value), decline invalid inbounds, filter trades by item, and more.</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Projected item warnings in the trade page</a>
+<a class="PreviewFeature" href="#StandardFeature14"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature14">
+<a>Projected item warnings integrated into trade page</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/projected_trade.png)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>View projected item warnings in trades & the trade window</p>
+<br>
+<p>View projected warning on item pages</p>
+<br>
+<p>Note: Projected items are determined using the Rolimons.com projected label</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Links to Rolimons.com on item pages</a>
+<a class="PreviewFeature" href="#StandardFeature15"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature15">
+<a>Embedded links to Rolimons.com item pages</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/embedded_roli_item.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Integrates direct links to the Rolimons.com item page in trades, trade window, and item page</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Links to Rolimons.com on user pages</a>
+<a class="PreviewFeature" href="#StandardFeature16"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature16">
+<a>Embedded links to Rolimons.com user pages</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/embedded_roli_user.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Integrates direct links to the Rolimons.com user page on a user's profile</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">RoPro Trade Offers value calculator</a>
+<a class="PreviewFeature" href="#StandardFeature17"></a>
+<div class="PreviewFeatureContainer" id="StandardFeature17">
+<a>RoPro Trade Offers value calculator</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/ropro_trade_offers_value.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Integrates Rolimons.com item values and calculates the total value of a trade offer on the trade offers page (https://roblox.com/offers)</p>
+</div>
+</div>
+</li>
+</ul>
+<ul class="FeatureBreakup">
+<li class="FeaturesTitle">
+<p>Additional Perks (2)</p>
+</li>
+<li class="FeatureNotClick"><div class="FeatureBack"></div>
+<a class="FeatureText">Post a RoPro trade offer once every 15min</a>
+<div class="PreviewFeature"></div>
+</li>
+<li class="FeatureNotClick"><div class="FeatureBack"></div>
+<a class="FeatureText">Unlimited comments on limited items per day</a>
+<div class="PreviewFeature"></div>
+</li>
+</ul>
+</ul>
+</div>
+<div class="TierFeaturesContainer hidden" id="ProCont">
+<ul class="FeaturesGridContainer">
+<ul class="FeaturePurchaseSubscription">
+<a>(Includes all Free & Standard Tier features)</a>
+</ul>
+<div class="PurchaseFeaturesCont">
+<div class="subtiername" style="display:flex;flex-direction:row">
+<img src="https://ropro.io/images/Tiers/pro.png" width="25" height="25" style="float:left">
+<a style="margin-left:15px;height:25px;line-height:25px;float:left">Pro Tier - <span id="proAmount">$7.99/month</span></a>
+</div>
+<div class="subbuttons" style="display:flex;flex-direction:row">
+<div style="height:35px;line-height:25px;margin:auto;margin-right:5px;">
+<input id="proYearly" button-checked="0" onclick="if (!window.__cfRLUnblockHandlers) return false; if(this.getAttribute('button-checked')==0){this.setAttribute('button-checked',1);checked=1;}else{this.setAttribute('button-checked',0);checked=0;};monthly=[document.getElementById('proOTP').getAttribute('button-checked') == 0 ? 656271 : 725495, document.getElementById('proOTP').getAttribute('button-checked') == 0 ? '$7.99/month' : '$7.99 [One Month Only]'];yearly=[document.getElementById('proOTP').getAttribute('button-checked') == 0 ? 656285 : 725508, document.getElementById('proOTP').getAttribute('button-checked') == 0 ? '$59.99/year' : '$59.99 [One Year Only]'];purchase=document.getElementById('proTierMonthlyPurchase');amount=document.getElementById('proAmount');if(checked){purchase.setAttribute('data-product',yearly[0]);amount.innerHTML=yearly[1]}else{purchase.setAttribute('data-product',monthly[0]);amount.innerHTML=monthly[1]};" type="checkbox" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<label onclick="if (!window.__cfRLUnblockHandlers) return false; this.parentNode.getElementsByTagName('input')[0].click()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">Save 33% with Yearly Pricing</label>
+</div>
+<div style="padding-left:10px;height:35px;line-height:25px;margin:auto;padding-right:10px;display:none;">
+<input id="proOTP" button-checked="0" onclick="if (!window.__cfRLUnblockHandlers) return false; if(this.getAttribute('button-checked')==0){this.setAttribute('button-checked',1);checked=1;document.getElementById('proTierMonthlyPurchase').innerHTML='Purchase';}else{this.setAttribute('button-checked',0);checked=0;document.getElementById('proTierMonthlyPurchase').innerHTML='Subscribe';};monthly=[document.getElementById('proYearly').getAttribute('button-checked') == 0 ? 656271 : 656285,document.getElementById('proYearly').getAttribute('button-checked') == 0 ? '$7.99/month' : '$59.99/year'];yearly=[document.getElementById('proYearly').getAttribute('button-checked') == 0 ? 725495 : 725508,document.getElementById('proYearly').getAttribute('button-checked') == 0 ? '$7.99 [One Month Only]' : '$59.99 [One Year Only]'];purchase=document.getElementById('proTierMonthlyPurchase');amount=document.getElementById('proAmount');if(checked){purchase.setAttribute('data-product',yearly[0]);amount.innerHTML=yearly[1]}else{purchase.setAttribute('data-product',monthly[0]);amount.innerHTML=monthly[1]};" type="checkbox" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<label onclick="if (!window.__cfRLUnblockHandlers) return false; this.parentNode.getElementsByTagName('input')[0].click()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">One Time Purchase</label>
+</div>
+<button class="buttonMonthlyPurchase" id="proTierMonthlyPurchase" onclick="if (!window.__cfRLUnblockHandlers) return false; openPaddle(parseInt(this.getAttribute('data-product')))" data-product="656271" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<b>Subscribe</b>
+</button>
+</div>
+</div>
+<ul class="FeatureBreakup" style="margin-top:30px">
+<li class="FeaturesTitle">
+<p>General Features (2)</p>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Live experience visit counter</a>
+<a class="PreviewFeature" href="#ProFeature1"></a>
+<div class="PreviewFeatureContainer" id="ProFeature1">
+<a>Live experience visit counter</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/live_playing_visit_count.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Updates the visit counters on experiences as they refresh</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Live experience player counter</a>
+<a class="PreviewFeature" href="#ProFeature2"></a>
+<div class="PreviewFeatureContainer" id="ProFeature2">
+<a>Live experience player counter</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/live_playing_visit_count.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Updates the playing counters on experiences as they refresh</p>
+</div>
+</div>
+</li>
+</ul>
+<ul class="FeatureBreakup">
+<li class="FeaturesTitle">
+<p>Trading Features (5)</p>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Trade value preview on sidebar</a>
+<a class="PreviewFeature" href="#ProFeature3"></a>
+<div class="PreviewFeatureContainer" id="ProFeature3">
+<a>Trade value preview on sidebar</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/trade_preview.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Preview the values of each trade on the sidebar</p>
+<br>
+<p>Quickly see if a trade is a win or loss</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Quick view item owner history</a>
+<a class="PreviewFeature" href="#ProFeature4"></a>
+<div class="PreviewFeatureContainer" id="ProFeature4">
+<a>Quick view item owner history</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/owner_history.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Quickly view the ownership history of every item in a trade</p>
+<br>
+<p>Integrates the Rolimons.com item ownership history feature</p>
+<br>
+<p>Useful for quickly determining if items are legitimate or poisoned</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Quick item search</a>
+<a class="PreviewFeature" href="#ProFeature5"></a>
+<div class="PreviewFeatureContainer" id="ProFeature5">
+<a>Quick item search</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/quick_item_search.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Quickly visit an item page by typing in the search bar</p>
+<br>
+<p>Works if you enter an item's acronym or just part of an item's name</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Trade notifier with built in value calculator</a>
+<a class="PreviewFeature" href="#ProFeature6"></a>
+<div class="PreviewFeatureContainer" id="ProFeature6">
+<a>Trade notifier with built in value calculator</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/trade_notifier.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Notifies you of new trades and calculates the value of each side of the trade and total win/loss value.</p>
+<br>
+<p>You can decline inbound trades or cancel outbound trades directly from the notification.</p>
+<br>
+<p>Optionally, you can disable declined trade notifications</p>
+<br>
+<p>Detects and notifies new trades up to 2x faster than Roblox+</p>
+</div>
+</div>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Auto-decline bad trades</a>
+<a class="PreviewFeature" href="#ProFeature7"></a>
+<div class="PreviewFeatureContainer" id="ProFeature7">
+<a>Auto-decline bad trades</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/autodecline.gif)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Automatically declines bad inbound trades</p>
+<br>
+<p>This feature, along with all other features, can be disabled in the RoPro settings page</p>
+<br>
+<p>The loss ratio at which to decline the trade can be configured in the RoPro settings page</p>
+</div>
+</div>
+</li>
+</ul>
+<ul class="FeatureBreakup">
+<li class="FeaturesTitle">
+<p>Account Security Features</p>
+</li>
+<li class="Feature"><div class="FeatureBack"></div>
+<a class="FeatureText">Trade Protection</a>
+<a class="PreviewFeature" href="#ProFeature8"></a>
+<div class="PreviewFeatureContainer" id="ProFeature8">
+<a>Trade Protection</a>
+<div class="FeatureIMG" style="background-image:url(https://ropro.io/feature_previews/projected_trade.png)"></div>
+<a class="CloseIcon" href="#"></a>
+<div class="FeaturesDesc">
+<p>Monitors your outbound trades for bad trades and automatically cancels them</p>
+<br>
+<p>Useful for users worried about their account being compromised</p>
+<br>
+<p>As long as user's browser is open, bad trades will be automatically cancelled within seconds</p>
+<br>
+<p>The loss ratio at which to cancel the trade can be configured in the RoPro settings page</p>
+</div>
+</div>
+</li>
+</ul>
+<ul class="FeatureBreakup">
+<li class="FeaturesTitle">
+<p>Additional Perks (2)</p>
+</li>
+<li class="FeatureNotClick"><div class="FeatureBack"></div>
+<a class="FeatureText">Post a RoPro trade offer once every 5min</a>
+<div class="PreviewFeature"></div>
+</li>
+<li class="FeatureNotClick"><div class="FeatureBack"></div>
+<a class="FeatureText">Unlimited comments on limited items per day</a>
+<div class="PreviewFeature"></div>
+</li>
+</ul>
+</ul>
+</div>
+<div class="TierFeaturesContainer hidden" id="UltraCont">
+<ul class="FeaturesGridContainer">
+<ul class="FeaturePurchaseSubscription">
+<a style="display:none;">(Includes all features)</a>
+</ul>
+<div class="PurchaseFeaturesCont">
+<div class="subtiername" style="display:flex;flex-direction:row">
+<img src="https://ropro.io/images/Tiers/ultra.png" width="25" height="25" style="float:left">
+<a style="margin-left:15px;height:25px;line-height:25px;float:left">Ultra Tier - <span id="ultraAmount">No Longer Available</span></a>
+</div>
+<div class="subbuttons" style="display:flex;flex-direction:row;display:none;">
+<div style="height:35px;line-height:25px;margin:auto;margin-right:5px;">
+<input id="ultraYearly" button-checked="0" onclick="if (!window.__cfRLUnblockHandlers) return false; if(this.getAttribute('button-checked')==0){this.setAttribute('button-checked',1);checked=1;}else{this.setAttribute('button-checked',0);checked=0;};monthly=[document.getElementById('ultraOTP').getAttribute('button-checked') == 0 ? 656273 : 725502, document.getElementById('ultraOTP').getAttribute('button-checked') == 0 ? '$19.99/month' : '$19.99 [One Month Only]'];yearly=[document.getElementById('ultraOTP').getAttribute('button-checked') == 0 ? 656286 : 725509, document.getElementById('ultraOTP').getAttribute('button-checked') == 0 ? '$159.99/year' : '$159.99 [One Year Only]'];purchase=document.getElementById('ultraTierMonthlyPurchase');amount=document.getElementById('ultraAmount');if(checked){purchase.setAttribute('data-product',yearly[0]);amount.innerHTML=yearly[1]}else{purchase.setAttribute('data-product',monthly[0]);amount.innerHTML=monthly[1].includes('/month') ? `$19.99/month` : monthly[1]};" type="checkbox" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<label onclick="if (!window.__cfRLUnblockHandlers) return false; this.parentNode.getElementsByTagName('input')[0].click()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">Save 33% with Yearly Pricing</label>
+</div>
+<div style="padding-left:10px;height:35px;line-height:25px;margin:auto;padding-right:10px;display:none;">
+<input id="ultraOTP" button-checked="0" onclick="if (!window.__cfRLUnblockHandlers) return false; if(this.getAttribute('button-checked')==0){this.setAttribute('button-checked',1);checked=1;document.getElementById('ultraTierMonthlyPurchase').innerHTML='Purchase';}else{this.setAttribute('button-checked',0);checked=0;document.getElementById('ultraTierMonthlyPurchase').innerHTML='Subscribe';};monthly=[document.getElementById('ultraYearly').getAttribute('button-checked') == 0 ? 656273 : 656286,document.getElementById('ultraYearly').getAttribute('button-checked') == 0 ? '$19.99/month' : '$159.99/year'];yearly=[document.getElementById('ultraYearly').getAttribute('button-checked') == 0 ? 725502 : 725509,document.getElementById('ultraYearly').getAttribute('button-checked') == 0 ? '$19.99 [One Month Only]' : '$159.99 [One Year Only]'];purchase=document.getElementById('ultraTierMonthlyPurchase');amount=document.getElementById('ultraAmount');if(checked){purchase.setAttribute('data-product',yearly[0]);amount.innerHTML=yearly[1]}else{purchase.setAttribute('data-product',monthly[0]);amount.innerHTML=monthly[1].includes('/month') ? `$19.99/month` : monthly[1]};" type="checkbox" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<label onclick="if (!window.__cfRLUnblockHandlers) return false; this.parentNode.getElementsByTagName('input')[0].click()" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">One Time Purchase</label>
+</div>
+<button class="buttonMonthlyPurchase" id="ultraTierMonthlyPurchase" onclick="if (!window.__cfRLUnblockHandlers) return false; openPaddle(parseInt(this.getAttribute('data-product')))" data-product="656273" data-cf-modified-3ca59dfc1340f4589ca1b7a0-="">
+<b>Subscribe</b>
+</button>
+</div>
+</div>
+<div style="max-width:600px;margin:auto;margin-top:30px;padding:20px;"><h1 style="text-align:center;"><u>Important notice for Ultra Tier subscribers</u></h1>Due to recent major Roblox API changes, we have made the difficult decision to deprecate the Deals Notifier &amp; Deals Page. Ultra Tier subscribers will keep their tier, but new users will not be able to subscribe to Ultra Tier.<br><br>As a result, we will be stopping renewal of all Ultra Tier subscriptions and extending all active Ultra Tier subscription keys to 4x their original length at no extra cost (1 month subscriptions will become 4 month subscriptions, 1 year subscriptions will become 4 year subscriptions, etc).<br><br>You will of course still be able to use all Pro, Standard, and Free features, but Ultra Tier features will no longer work. If you would rather receive a partial refund based on the amount of time remaining on your Ultra Tier subscription instead of a 4x extension of your subscription, you can email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88faedeefde6ecfbc8fae7f8fae7a6e1e7">[email&#160;protected]</a> with your email &amp; subscription key.</div>
+<ul style="padding-right: 35px;margin-top:50px;display:none;">
+<li class="FeatureBig">
+<div class="FeatureBack"></div>
+<h1 style="margin-top:0">Deals Notifier</h1>
+<div class="ultratext" style="margin-right:25px;width:60%">
+<p>Real-time limited item deals notifier</p>
+<br>
+<p>Uses RoPro's proprietary deal finder</p>
+<br>
+<p>Buy button integrated into notification</p>
+<br>
+<p>Choose a price threshold below item RAP or Value to be notified for</p>
+<br>
+<p>Deals are found up to 10x faster than Rolimons deals page</p>
+<br>
+<p>Important Note: To prevent abuse or capitalizing off of pricing mistakes, RoPro Deals Notifier does not notify items selling for 30% of item RAP or less (70% off). For example, an item with 1000 RAP selling for 250 would not be notified. Ultra Tier is not intended to compete with item bots, which are violative of the Roblox TOS. Ultra Tier is provided as is, with no guarantee of individual results. If you have any inquiries regarding this tier please contact <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d2cfd0d2cfe0d2cfd0d2cf8ec9cf8e">[email&#160;protected]</a></p>
+</div>
+<img src="https://ropro.io/feature_previews/deals_notifier.gif" width="45%" height="auto" style="margin:auto">
+</li>
+<li class="FeatureBig">
+<div class="FeatureBack"></div>
+<h1 style="margin-top:0">Deals Page</h1>
+<div class="ultratext" style="margin-right:25px;width:60%">
+<p>Real-time log of all limited item snags & snipes on Roblox</p>
+<br>
+<p>The deals page is located at:</p>
+<a href="https://ropro.io/deals">https://ropro.io/deals</a>
+<br>
+<p>You can use the deals page without having the RoPro extension installed. Even on mobile!</p>
+</div>
+<img src="https://ropro.io/feature_previews/deals.gif" width="45%" height="auto" style="margin:auto">
+</li>
+</ul>
+</ul>
+</div>
+</section>
+</section>
+<footer class="footercontainer">
+<div class="logofooter"></div>
+<div class="navfooter">
+<div class="footerdivider"></div>
+<ul style="display:flex">
+<li class="FooterNotice">
+<p>RoPro is not affiliated with Roblox.com or Rolimons.com.</p>
+<br>
+<p>The RoPro extension is fully compatible with Roblox Plus and BTRoblox.</p>
+<br>
+<p>RoPro is made by Dice: I'm a college student and decade long Roblox player who enjoys creating cool features to enhance Roblox! You can contact me via Roblox @Dice_RoPro, or via email at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c6cbc1c7e2d0cdd2d0cd8ccbcd">[email&#160;protected]</a> :)</p>
+<br>
+<p>Copyright © 2021 Dice Systems LLC</p>
+</li>
+<li class="DiceSystemsPolicy">
+<a href="/terms">Terms of Service</a>
+<br>
+<a href="/privacy-policy">Privacy Policy</a>
+<br>
+<a href="/subscription">Subscription</a>
+<br>
+<a href="/support">Help</a>
+</li>
+<li class="FooterSocial">
+<a href="https://ropro.io/discord">Discord</a>
+<br>
+<a href="https://ropro.io/tiktok">TikTok</a>
+<br>
+<a href="https://ropro.io/twitter">Twitter</a>
+<br>
+<a href="https://ropro.io/group">Group</a>
+</li>
+</ul>
+</div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="3ca59dfc1340f4589ca1b7a0-|49" defer=""></script></body>
+</html>
