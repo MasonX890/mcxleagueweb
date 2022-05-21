@@ -25,9 +25,7 @@
 body{
     line-height: 1.5;
     font-family: var(--mainFont);
-    background-color: #282828;;
-    color: lightgray;
-    background: #282828;
+    background-color: var(--darkGray);
 }
 
 /* Resuable stylings */
@@ -324,7 +322,7 @@ button{
     margin: 3.2rem 0 0 0;
 }
 .content-mid h4{
-    color: var(--PaynesGrey);
+    color: var(--darkGray);
     margin-bottom: 2.2rem;
 }
 .content-mid-list{
