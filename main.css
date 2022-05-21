@@ -332,7 +332,7 @@ button{
     margin-right: auto;
 }
 .content-item{
-    background: #fff;
+    background: #1c1c1c;
     box-shadow: 0 10px 16px -8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     padding: 2.2rem 0.05rem;
@@ -441,6 +441,7 @@ button{
     padding-top: 1.6rem;
 }
 .faq-body .text{
+    color: var(--lynxWhite);
     line-height: 1.9;
     opacity: 0.9;
     font-size: 1rem;
