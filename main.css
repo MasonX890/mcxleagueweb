@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 
@@ -26,7 +25,7 @@
 body{
     line-height: 1.5;
     font-family: var(--mainFont);
-    background-color: #1c1c1c;
+    background-color: var(--lynxWhite);
 }
 
 /* Resuable stylings */
@@ -323,7 +322,7 @@ button{
     margin: 3.2rem 0 0 0;
 }
 .content-mid h4{
-    color: var(--darkGray);
+    color: var(--PaynesGrey);
     margin-bottom: 2.2rem;
 }
 .content-mid-list{
@@ -332,7 +331,7 @@ button{
     margin-right: auto;
 }
 .content-item{
-    background: #1c1c1c;
+    background: #fff;
     box-shadow: 0 10px 16px -8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     padding: 2.2rem 0.05rem;
@@ -441,7 +440,6 @@ button{
     padding-top: 1.6rem;
 }
 .faq-body .text{
-    color: var(--lynxWhite);
     line-height: 1.9;
     opacity: 0.9;
     font-size: 1rem;
