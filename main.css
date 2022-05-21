@@ -27,6 +27,7 @@ body{
     font-family: var(--mainFont);
     background-color: var(--lynxWhite);
     color: lightgray;
+    background: #282828;
 }
 
 /* Resuable stylings */
