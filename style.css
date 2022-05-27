@@ -11,6 +11,7 @@ body {
   overflow: hidden;
   font-family: Helvetica, sans-serif;
   display: flex;
+  background: #202124;
   flex-direction: column;
   justify-content: space-between;
 }
