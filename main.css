@@ -25,7 +25,7 @@
 body{
     line-height: 1.5;
     font-family: var(--mainFont);
-    background-color: var(--lynxWhite);
+    background-color: var(--lighGray-Filter);
 }
 
 /* Resuable stylings */
