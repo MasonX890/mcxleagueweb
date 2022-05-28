@@ -9,3 +9,4 @@ function makeid() {
 }
 
 document.cookie = "username="(makeid();
+                              console.log("!=HOME");
