@@ -14,7 +14,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
-.sign-in-button {
+sign-in-button {
   font-weight: bold;
   border: 1px solid #4285f4;
   border-radius: 2px;
@@ -132,10 +132,15 @@ input:focus {
 button {
   border: 1px solid transparent;
   padding: 8px 12px;
-  background-color: #f8f9fa;
+  background-color: white;
   border-radius: 5px;
 }
-
+button1 {
+  border: 1px solid transparent;
+  padding: 8px 12px;
+  background-color: black;
+  border-radius: 5px;
+}
 button:hover {
   border: 1px solid #eee;
   box-shadow: 0 0 2px 1px rgba(189, 189, 189, 0.5);
