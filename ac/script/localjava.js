@@ -1,1 +1,4 @@
-document.querySelector('.menu-btn').addEventListener('click', () => document.querySelector('.main-menu').classList.toggle('show'));
+const selectElement = (element) => document.querySelector(element);
+selectElement('.mobile-menu').addEventListener('click', () => {
+    selectElement('header').classList.toggle('active');
+});
