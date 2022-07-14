@@ -58,19 +58,19 @@ header{
 
 .nav-link-apple{
     width: 1.6rem;
-    background: url("images/apple.svg") no-repeat;
+    background: url("images/icons/apple.svg") no-repeat;
     height: 4.4rem;
 }
 
 .nav-link-search{
     width: 1.6rem;
-    background: url("images/search.svg") no-repeat;
+    background: url("images/icons/search.svg") no-repeat;
     height: 4.4rem;
 }
 
 .nav-link-bag{
     width: 1.4rem;
-    background: url("images/bag.svg") no-repeat;
+    background: url("images/icons/bag.svg") no-repeat;
     height: 4.4rem;
 }
 
