@@ -58,19 +58,19 @@ header{
 
 .nav-link-apple{
     width: 1.6rem;
-    background: url("/ac/images/apple.svg");
+    background: url("/images/apple.svg");
     height: 4.4rem;
 }
 
 .nav-link-search{
     width: 1.6rem;
-    background: url("/ac/images/search.svg");
+    background: url("/images/search.svg");
     height: 4.4rem;
 }
 
 .nav-link-bag{
     width: 1.4rem;
-    background: url("/ac/images/bag.svg");
+    background: url("/images/bag.svg");
     height: 4.4rem;
 }
 
@@ -200,7 +200,7 @@ header{
 
     .title-heading-watch{
         height: 6.2rem;
-        background: url("images/hero/watch/logo_watch_medium.png");
+        background: url("/images/hero/watch/logo_watch_medium.png");
         background-size: auto 6.2rem;
     }
 }
